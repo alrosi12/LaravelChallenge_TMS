@@ -2,6 +2,7 @@
 
 namespace App\Events;
 
+use App\Models\Task;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -17,7 +18,7 @@ class TaskAssigned
     /**
      * Create a new event instance.
      */
-    public function __construct()
+    public function __construct(public Task $task)
     {
         //
     }

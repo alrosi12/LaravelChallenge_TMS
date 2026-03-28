@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Events\TaskAssigned;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreTaskRequest;
 use App\Http\Requests\UpdateTaskRequest;
@@ -14,10 +15,19 @@ class TaskController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $tasks = Task::with('comments.user', 'assignee')->paginate(5);
-        return TaskResource::collection($tasks);
+        $tasks = Task::with('comments.user', 'assignee');
+        if ($request->filter === 'overdue') {
+            $tasks->overdue();
+        }
+        if ($request->filter === 'pending') {
+            $tasks->pending();
+        }
+        if ($request->assignee_id) {
+            $tasks->assignedTo($request->assignee_id);
+        }
+        return TaskResource::collection($tasks->paginate());
     }
 
     /**
@@ -25,11 +35,16 @@ class TaskController extends Controller
      */
     public function store(StoreTaskRequest $request)
     {
-        $task = Task::create($request->validated());
+        $task = Task::create([
+            ...$request->validated(),
+            'user_id' => auth()->id()
+        ]);
+        if ($task->assignee_id) {
+            TaskAssigned::dispatch($task);
+        }
         return response()->json([
             'status' => 'success',
             'task' => new TaskResource($task)
-
         ]);
     }
 
@@ -50,7 +65,11 @@ class TaskController extends Controller
     public function update(UpdateTaskRequest $request, Task $task)
     {
         $this->authorize('update', $task);
+
         $task->update($request->validated());
+        if ($task->assignee_id) {
+            TaskAssigned::dispatch($task);
+        }
         return response()->json([
             'status' => 'Updated Successfully',
             'task' => new TaskResource($task)
