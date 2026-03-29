@@ -9,6 +9,7 @@ use App\Http\Requests\UpdateTaskRequest;
 use App\Http\Resources\TaskResource;
 use App\Models\Task;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class TaskController extends Controller
 {
@@ -17,17 +18,25 @@ class TaskController extends Controller
      */
     public function index(Request $request)
     {
-        $tasks = Task::with('comments.user', 'assignee');
-        if ($request->filter === 'overdue') {
-            $tasks->overdue();
+        if ($request->filter || $request->assignee_id) {
+
+            $tasks = Task::with('comments.user', 'assignee');
+
+            if ($request->filter === 'overdue') {
+                $tasks =   $tasks->overdue();
+            }
+            if ($request->filter === 'pending') {
+                $tasks =  $tasks->pending();
+            }
+            if ($request->assignee_id) {
+                $tasks =  $tasks->assignedTo($request->assignee_id);
+            }
+            return TaskResource::collection($tasks->paginate());
         }
-        if ($request->filter === 'pending') {
-            $tasks->pending();
-        }
-        if ($request->assignee_id) {
-            $tasks->assignedTo($request->assignee_id);
-        }
-        // git
+
+        $tasks = Cache::remember('tasks', 300, function () {
+            return Task::with('comments.user', 'assignee');
+        });
         return TaskResource::collection($tasks->paginate());
     }
 
@@ -36,6 +45,7 @@ class TaskController extends Controller
      */
     public function store(StoreTaskRequest $request)
     {
+        Cache::forget('tasks');
         $task = Task::create([
             ...$request->validated(),
             'user_id' => auth()->id()
@@ -65,6 +75,8 @@ class TaskController extends Controller
      */
     public function update(UpdateTaskRequest $request, Task $task)
     {
+        Cache::forget('tasks');
+
         $this->authorize('update', $task);
 
         $task->update($request->validated());
@@ -83,6 +95,8 @@ class TaskController extends Controller
      */
     public function destroy(Task $task)
     {
+        Cache::forget('tasks');
+
         $this->authorize('delete', $task);
         $task->delete();
         return response()->json([
