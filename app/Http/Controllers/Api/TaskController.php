@@ -20,7 +20,7 @@ class TaskController extends Controller
     {
         if ($request->filter || $request->assignee_id) {
 
-            $tasks = Task::with('comments.user', 'assignee');
+            $tasks = Task::with('comments.user', 'assignee')->where('user_id', auth()->id());
 
             if ($request->filter === 'overdue') {
                 $tasks =   $tasks->overdue();
@@ -34,8 +34,8 @@ class TaskController extends Controller
             return TaskResource::collection($tasks->paginate());
         }
 
-        $tasks = Cache::remember('tasks', 300, function () {
-            return Task::with('comments.user', 'assignee');
+        $tasks = Cache::remember('tasks_' . auth()->id(), 300, function () {
+            return Task::with('comments.user', 'assignee')->where('user_id', auth()->id());
         });
         return TaskResource::collection($tasks->paginate());
     }
@@ -45,7 +45,7 @@ class TaskController extends Controller
      */
     public function store(StoreTaskRequest $request)
     {
-        Cache::forget('tasks');
+        Cache::forget('tasks_' . auth()->id());
         $task = Task::create([
             ...$request->validated(),
             'user_id' => auth()->id()
@@ -75,7 +75,7 @@ class TaskController extends Controller
      */
     public function update(UpdateTaskRequest $request, Task $task)
     {
-        Cache::forget('tasks');
+        Cache::forget('tasks_' . auth()->id());
 
         $this->authorize('update', $task);
 
