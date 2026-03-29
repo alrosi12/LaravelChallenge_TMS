@@ -1,0 +1,586 @@
+{
+  "info": {
+    "_postman_id": "33b21716-0bfb-42ab-84e0-6dd64de81ab2",
+    "name": "TMS",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "52563606",
+    "_collection_link": "https://go.postman.co/collection/52563606-33b21716-0bfb-42ab-84e0-6dd64de81ab2?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Tasks",
+      "item": [
+        {
+          "name": "list all tasks",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/tasks?page=2",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "tasks"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "2"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "name",
+                  "value": "mahmoud",
+                  "type": "text"
+                },
+                {
+                  "key": "email",
+                  "value": "mahmoud@ps.ps",
+                  "type": "text"
+                },
+                {
+                  "key": "password",
+                  "value": "password1234",
+                  "type": "text"
+                },
+                {
+                  "key": "confirm_password",
+                  "value": "",
+                  "type": "text",
+                  "uuid": "818eab16-e9d2-4a06-a90c-71f90751d6af",
+                  "disabled": true
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/register",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "register"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "show task",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "1|VpCdlAXuqquKppnM8ZjFjJ1VDZdx5eUdAG9ouTkyaf0db516",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/tasks/4",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "tasks",
+                "4"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "email",
+                  "value": "mahmoud@ps.ps",
+                  "type": "text"
+                },
+                {
+                  "key": "password",
+                  "value": "password1234",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/login",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Task",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "1|VpCdlAXuqquKppnM8ZjFjJ1VDZdx5eUdAG9ouTkyaf0db516",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/tasks/4",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "tasks",
+                "4"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Task",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "1|VpCdlAXuqquKppnM8ZjFjJ1VDZdx5eUdAG9ouTkyaf0db516",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "title",
+                  "value": "mahmoud",
+                  "type": "text",
+                  "uuid": "c7501261-da62-47d5-90bf-1213600f2689"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/tasks/5",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "tasks",
+                "5"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create new Task",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "1|VpCdlAXuqquKppnM8ZjFjJ1VDZdx5eUdAG9ouTkyaf0db516",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "title",
+                  "value": "new task 087",
+                  "type": "text",
+                  "uuid": "9a34738e-3436-4aba-b16b-a6a66a34fce9"
+                },
+                {
+                  "key": "description",
+                  "value": "description",
+                  "type": "text",
+                  "uuid": "616114b4-7b21-4ac6-8212-027d35468e9a"
+                },
+                {
+                  "key": "status",
+                  "value": "pending",
+                  "type": "text",
+                  "uuid": "92931ac1-284b-4b81-9502-adc8787efc04"
+                },
+                {
+                  "key": "due_date",
+                  "value": "2026-04-02",
+                  "type": "text",
+                  "uuid": "b5af9be7-6dcb-41a9-bcb6-d20436c42491"
+                },
+                {
+                  "key": "assignee_id",
+                  "value": "7",
+                  "type": "text",
+                  "uuid": "a4a2cf6c-842a-461a-a935-333a73632e09"
+                },
+                {
+                  "key": "user_id",
+                  "value": "12",
+                  "type": "text",
+                  "uuid": "1e7984ed-5020-4dd4-baef-4b528d2b8732",
+                  "disabled": true
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/tasks/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "tasks",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Filtering Search",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "1|VpCdlAXuqquKppnM8ZjFjJ1VDZdx5eUdAG9ouTkyaf0db516",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "title",
+                  "value": "new task api",
+                  "type": "text",
+                  "uuid": "9a34738e-3436-4aba-b16b-a6a66a34fce9"
+                },
+                {
+                  "key": "description",
+                  "value": "description",
+                  "type": "text",
+                  "uuid": "616114b4-7b21-4ac6-8212-027d35468e9a"
+                },
+                {
+                  "key": "status",
+                  "value": "pending",
+                  "type": "text",
+                  "uuid": "92931ac1-284b-4b81-9502-adc8787efc04"
+                },
+                {
+                  "key": "due_date",
+                  "value": "2026-04-02",
+                  "type": "text",
+                  "uuid": "b5af9be7-6dcb-41a9-bcb6-d20436c42491"
+                },
+                {
+                  "key": "assignee_id",
+                  "value": "2",
+                  "type": "text",
+                  "uuid": "a4a2cf6c-842a-461a-a935-333a73632e09"
+                },
+                {
+                  "key": "user_id",
+                  "value": "12",
+                  "type": "text",
+                  "uuid": "1e7984ed-5020-4dd4-baef-4b528d2b8732",
+                  "disabled": true
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/tasks?filter=pending",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "tasks"
+              ],
+              "query": [
+                {
+                  "key": "filter",
+                  "value": "pending"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create New Comment",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "1|VpCdlAXuqquKppnM8ZjFjJ1VDZdx5eUdAG9ouTkyaf0db516",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "title",
+                  "value": "new task api",
+                  "type": "text",
+                  "uuid": "9a34738e-3436-4aba-b16b-a6a66a34fce9",
+                  "disabled": true
+                },
+                {
+                  "key": "description",
+                  "value": "description",
+                  "type": "text",
+                  "uuid": "616114b4-7b21-4ac6-8212-027d35468e9a",
+                  "disabled": true
+                },
+                {
+                  "key": "status",
+                  "value": "pending",
+                  "type": "text",
+                  "uuid": "92931ac1-284b-4b81-9502-adc8787efc04",
+                  "disabled": true
+                },
+                {
+                  "key": "due_date",
+                  "value": "2026-04-02",
+                  "type": "text",
+                  "uuid": "b5af9be7-6dcb-41a9-bcb6-d20436c42491",
+                  "disabled": true
+                },
+                {
+                  "key": "assignee_id",
+                  "value": "2",
+                  "type": "text",
+                  "uuid": "a4a2cf6c-842a-461a-a935-333a73632e09",
+                  "disabled": true
+                },
+                {
+                  "key": "user_id",
+                  "value": "12",
+                  "type": "text",
+                  "uuid": "1e7984ed-5020-4dd4-baef-4b528d2b8732",
+                  "disabled": true
+                },
+                {
+                  "key": "body",
+                  "value": "test api",
+                  "type": "text",
+                  "uuid": "3033bc83-83fd-4285-9357-de803cc57ccb"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/tasks/1/comments",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "tasks",
+                "1",
+                "comments"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Task Comments",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "1|VpCdlAXuqquKppnM8ZjFjJ1VDZdx5eUdAG9ouTkyaf0db516",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "title",
+                  "value": "new task api",
+                  "type": "text",
+                  "uuid": "9a34738e-3436-4aba-b16b-a6a66a34fce9"
+                },
+                {
+                  "key": "description",
+                  "value": "description",
+                  "type": "text",
+                  "uuid": "616114b4-7b21-4ac6-8212-027d35468e9a"
+                },
+                {
+                  "key": "status",
+                  "value": "pending",
+                  "type": "text",
+                  "uuid": "92931ac1-284b-4b81-9502-adc8787efc04"
+                },
+                {
+                  "key": "due_date",
+                  "value": "2026-04-02",
+                  "type": "text",
+                  "uuid": "b5af9be7-6dcb-41a9-bcb6-d20436c42491"
+                },
+                {
+                  "key": "assignee_id",
+                  "value": "2",
+                  "type": "text",
+                  "uuid": "a4a2cf6c-842a-461a-a935-333a73632e09"
+                },
+                {
+                  "key": "user_id",
+                  "value": "12",
+                  "type": "text",
+                  "uuid": "1e7984ed-5020-4dd4-baef-4b528d2b8732",
+                  "disabled": true
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/tasks/1/comments",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "tasks",
+                "1",
+                "comments"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
